@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			
+			<style>
+                body {
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    font-size: 16px;
+                    background-color: black;
+                    color: green;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                #maintext {
+                    margin: auto;
+                    letter-spacing: .05em;
+                    margin-top: 15vh;
+                    font-size: 6em;
+                    font-weight: bold;
+                }
+                #buttons {
+                    padding-top: 30vh;
+                    display: flex;
+                    height: 14vh;
+                    min-width: 50vw;
+                    margin: 0 auto;
+                }
+                .button {
+                    letter-spacing: -.05em;
+                    padding: 1em;
+                    border: 2px solid white;
+                    border-radius: 4px;
+                    margin: 0px 2vw 0px 2vw;
+                    font-size: 1.4em;
+                    font-weight: bold;
+                    color: black;
+                    background-color: rgb(195, 195, 195);
+                    display: flex;
+                    min-width: 50px;
+                    flex-grow: 1;
+                    align-items: center;
+                    justify-content: center;
+                }
+			</style>
+		</head>
+		<body>
+            <div id="maintext">
+                <span id="colored">GREEN</span>
+                <p id="tryagain"></p>
+            </div>
+            <div id="buttons">
+                <div class="button" id="red">RED</div>
+                <div class="button" id="green">GREEN</div>
+                <div class="button" id="blue">BLUE</div>
+                <div class="button" id="yellow">YELLOW</div>
+            </div>
+			<script>
+                let colored = document.getElementById("colored"),
+                    buttons = document.getElementsByClassName("button"),
+                    myColor = colored.style.color,
+                    counter = 0,
+                    userChoice = "";
+
+                function stroopRandom() {
+                    let colorArray = ['RED', 'GREEN', 'BLUE', 'YELLOW'];
+                    colored.style.color = colorArray[Math.round(Math.random() * 3)].toLowerCase();
+                    colored.innerText = colorArray[Math.round(Math.random() * 3)];
+                    colored.innerText === colored.style.color.toUpperCase() ? stroopRandom() : colored.innerText = colored.innerText;
+                }
+
+                for(let i = 0; i < buttons.length; i++) {
+                    buttons[i].addEventListener("click", 
+                    function stroopChoice() {
+                        myColor = colored.style.color;
+                        userChoice = this.innerText.toLowerCase();
+                        if(myColor === userChoice) {
+                            stroopRandom();
+                            counter += 1;
+                            console.log(counter.toString());
+                        }
+                    });
+                }
+
+                stroopRandom();
+			</script>
+		</body>
+	</html>
